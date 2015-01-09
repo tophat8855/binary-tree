@@ -16,31 +16,34 @@ class BinaryTree
     return nil if !node
     return node if node.value == value
     return dfs(value,node.left) || dfs(value,node.right)
+  end
 
-    # return node if node.value == value
-    # while !node.left.nil?
-    #   dfs(value, node.left)
-    # end
-    # dfs(value, node.right)
+  def sum(node=@root)
+    return 0 if node.nil?
+    node.value + sum(node.left) + sum(node.right)
+  end
+
+  def bfs(value,node=@root)
+    return node if node.value == value
   end
 end
 
-tree = BinaryTree.new("HTML")
-tree.root.left = Node.new("HEAD")
-tree.root.left.left = Node.new("SCRIPT")
-tree.root.left.right = Node.new("TITLE")
-tree.root.right = Node.new("BODY")
-tree.root.right.left = Node.new("DIV")
-tree.root.right.left.left = Node.new ("P")
-tree.root.right.left.right = Node.new("A")
-tree.root.right.right = Node.new ("UL")
-tree.root.right.right.left = Node.new("LI")
+tree = BinaryTree.new(1)
+tree.root.left = Node.new(2)
+tree.root.left.left = Node.new(3)
+tree.root.left.right = Node.new(4)
+tree.root.right = Node.new(5)
+tree.root.right.left = Node.new(6)
+tree.root.right.left.left = Node.new (7)
+tree.root.right.left.right = Node.new(8)
+tree.root.right.right = Node.new (9)
+tree.root.right.right.left = Node.new(10)
 
 
-tree.dfs("LI")
-#<Node:0x007fd74a879ac8 @value="LI">
+tree.dfs("3")
+#<Node:0x007fd74a879ac8 @value="3">
 
-tree.dfs("HELLO")
+#tree.dfs("100")
 # nil
 
-binding.pry
+p tree.sum
