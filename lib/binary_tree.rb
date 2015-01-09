@@ -23,8 +23,17 @@ class BinaryTree
     node.value + sum(node.left) + sum(node.right)
   end
 
-  def bfs(value,node=@root)
-    return node if node.value == value
+  def bfs(value,node=@root) #bfs = breadth first search
+    array_of_nodes = [@root]
+
+    while !array_of_nodes.empty?
+      node = array_of_nodes.pop
+      p node.value
+      return node if node.value == value
+      array_of_nodes.unshift(node.left) if !node.left.nil?
+      array_of_nodes.unshift(node.right) if !node.right.nil?
+    end
+    nil
   end
 end
 
@@ -41,9 +50,4 @@ tree.root.right.right.left = Node.new(10)
 
 
 tree.dfs("3")
-#<Node:0x007fd74a879ac8 @value="3">
-
-#tree.dfs("100")
-# nil
-
 p tree.sum
